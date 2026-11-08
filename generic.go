@@ -75,8 +75,6 @@ func checkForMatchWithValue[T any](cli []string, names []string, variable *T, de
 	for idx, entry := range cli {
 		entry = strings.TrimLeft(entry, "-")
 
-		fmt.Println(entry)
-
 		if slices.Contains(names, entry) {
 			// handle the case for presence flags
 			if convFunc == nil {
