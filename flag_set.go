@@ -12,18 +12,12 @@ type FlagSet struct {
 	usage       string
 }
 
-var mainFlagSet FlagSet = FlagSet{}
-
-func Usage() {
-	mainFlagSet.Usage()
-}
-
 func (set *FlagSet) Usage() {
 	if set == nil {
 		return
 	}
 
-	fmt.Println("Subcommands:\n")
+	fmt.Println("Subcommands:")
 	for _, subCmd := range set.subCommands {
 		fmt.Printf("  %s\n", subCmd.name)
 		if subCmd.usage != "" {
@@ -31,7 +25,7 @@ func (set *FlagSet) Usage() {
 		}
 	}
 
-	fmt.Println("\n\nFlags:\n")
+	fmt.Println("\n\nFlags:")
 	for _, flag := range set.flags {
 		names := strings.Join(flag.names, ", -")
 		fmt.Printf("  -%s\n", names)

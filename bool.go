@@ -1,9 +1,5 @@
 package cli
 
-func BoolVar(name string, variable *bool, defaultValue bool, usage string) *Flag {
-	return boolVarInternal(&mainFlagSet, name, variable, defaultValue, usage)
-}
-
 func (set *FlagSet) BoolVar(name string, variable *bool, defaultValue bool, usage string) *Flag {
 	return boolVarInternal(set, name, variable, defaultValue, usage)
 }

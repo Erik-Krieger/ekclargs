@@ -5,18 +5,6 @@ import (
 	"slices"
 )
 
-func StringVar(name string, variable *string, defaultValue string, usage string) *Flag {
-	return stringVarInternal(&mainFlagSet, name, variable, defaultValue, usage)
-}
-
-func StringVarValidSet(name string, variable *string, defaultValue string, usage string, validSet []string) *Flag {
-	return stringVarValidSetInternal(&mainFlagSet, name, variable, defaultValue, usage, validSet)
-}
-
-func StringMultiple(name string, collection *[]string, usage string) *Flag {
-	return stringMultipleInternal(&mainFlagSet, name, collection, usage)
-}
-
 func (set *FlagSet) StringVar(name string, variable *string, defaultValue string, usage string) *Flag {
 	return stringVarInternal(set, name, variable, defaultValue, usage)
 }

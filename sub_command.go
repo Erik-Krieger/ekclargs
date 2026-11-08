@@ -1,9 +1,5 @@
 package cli
 
-func AddSubCommand(name string) *FlagSet {
-	return addSubCommand(&mainFlagSet, name)
-}
-
 func (set *FlagSet) AddSubCommand(name string) *FlagSet {
 	return addSubCommand(set, name)
 }

@@ -12,6 +12,11 @@ func anyVarInternal[T any](flagSet *FlagSet, name string, variable *T, defaultVa
 		return err
 	}
 
+	// It doesn't make sense to add an empty flag.
+	if name == "" {
+		return nil
+	}
+
 	newFlag := &Flag{
 		names: []string{name},
 		fn:    fn,
@@ -23,6 +28,11 @@ func anyVarInternal[T any](flagSet *FlagSet, name string, variable *T, defaultVa
 }
 
 func anyMultipleInternal[T any](flagSet *FlagSet, name string, collection *[]T, usage string, convFunc func(s string) (T, error)) *Flag {
+	// It doesn't make sense to add an empty flag.
+	if name == "" {
+		return nil
+	}
+
 	fn := func(cli []string, flg *Flag) error {
 		if collection == nil {
 			return fmt.Errorf("The passed in collection was nil")
