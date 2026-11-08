@@ -6,14 +6,14 @@ import (
 	"strings"
 )
 
-func Parse() error {
+func Parse() (*FlagSet, error) {
 	remainingCli := os.Args[1:]
 	return parseInner(&mainFlagSet, remainingCli)
 }
 
-func parseInner(flagSet *FlagSet, cli []string) error {
+func parseInner(flagSet *FlagSet, cli []string) (*FlagSet, error) {
 	if len(cli) < 1 {
-		return nil
+		return flagSet, nil
 	}
 
 	if !strings.HasPrefix(cli[0], "-") {
@@ -22,15 +22,15 @@ func parseInner(flagSet *FlagSet, cli []string) error {
 			return parseInner(subCmd, cli)
 		}
 
-		return fmt.Errorf("invalid param")
+		return flagSet, fmt.Errorf("invalid param")
 	}
 
 	for _, flg := range flagSet.flags {
 		err := flg.fn(cli, flg)
 		if err != nil {
-			return err
+			return flagSet, err
 		}
 	}
 
-	return nil
+	return flagSet, nil
 }
